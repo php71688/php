@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>朋友圈</title>
+    <link rel="stylesheet" href="/static/css/0_temp.css">
+</head>
+<body>
+<ul>
+    <!--<li class="clearfix">-->
+        <!--&lt;!&ndash; 朋友圈头像 &ndash;&gt;-->
+        <!--<div class="avt-wrap">-->
+            <!--<img class="avt-wrap__img" alt="头像" src="https://demo.genban.org/demo/257/images/n5.jpg"/>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; 朋友圈内容区域 &ndash;&gt;-->
+        <!--<div class="hd">-->
+            <!--&lt;!&ndash; 发布人昵称 &ndash;&gt;-->
+            <!--<p class="name">-->
+                <!--王思聪-->
+            <!--</p>-->
+            <!--&lt;!&ndash; 发布内容 &ndash;&gt;-->
+            <!--<div class="post">-->
+                <!--<p class="post__text">-->
+                    <!--那一年这兄弟三人发誓一定要出人头地-->
+                    <!--<br>-->
+                    <!--以后有福同享有难同当-->
+                    <!--<br>-->
+                    <!--如今：-->
+                    <!--<br>-->
+                    <!--大哥只手遮天万人之上-->
+                    <!--<br>-->
+                    <!--二哥黄金万两富甲一方-->
+                    <!--<br>-->
+                    <!--三弟淡泊名利为人低调-->
+                <!--</p>-->
+                <!--&lt;!&ndash; 发布的图片,如果只有一张图片则添加 post__imgs&#45;&#45;1 类名&ndash;&gt;-->
+                <!--<div class="post__imgs post__imgs&#45;&#45;1">-->
+                    <!--<img class="post__imgs__item" src="https://source.unsplash.com/random" alt="">-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</li>-->
+    {foreach $data as $v}
+    <li class="clearfix">
+        <!-- 朋友圈头像 -->
+        <div class="avt-wrap">
+            <img class="avt-wrap__img" alt="头像" src="/{$v.img}"/>
+        </div>
+        <!-- 朋友圈内容区域 -->
+        <div class="hd">
+            <!-- 发布人昵称 -->
+            <p class="name">
+                {$v['name']}
+            </p>
+            <!-- 发布内容 -->
+            <div class="post">
+                <p class="post__text">
+                   {$v.title}
+                    <br>
+                    规格:{$v.specifications}
+                    <br>
+                    {$v.detail}
+                    <!--<br>-->
+                    <!--二哥黄金万两富甲一方-->
+                    <!--<br>-->
+                    <!--三弟淡泊名利为人低调-->
+                </p>
+                <p class="price">
+                    <span class="price-now"><span style="font-size: 14px">售价：￥</span> {$v.shop_price} </span>
+                    <span class="price-old">￥ {$v.makerprice} </span>
+                </p>
+                <!-- 发布的图片,如果有4张图片则添加 post__imgs--4 类名 , 如果已售罄则添加 post__imgs--out 类名 -->
+                {if ($v['sold'])==0}
+                <div class="post__imgs post__imgs--4 post__imgs--out">
+                    {foreach $v.cover as $vo}
+                    <img class="post__imgs__item" src="{$vo}" alt="">
+                    {/foreach}
+                </div>
+                {else/}
+                <div class="post__imgs ">
+                    {foreach $v.cover as $vo}
+                    <img class="post__imgs__item" src="{$vo}" alt="">
+                    {/foreach}
+                </div>
+                {/if}
+            </div>
+        </div>
+    </li>
+    {/foreach}
+</ul>
+</body>
+</html>
